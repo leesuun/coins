@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "styled-components";
 
 import App from "./App";
-import { DarkMode, Theme } from "./theme";
+import { DarkMode } from "./theme";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement

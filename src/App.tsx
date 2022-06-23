@@ -1,6 +1,6 @@
-import styled, { createGlobalStyle } from "styled-components";
-import { useState, useEffect } from "react";
-import coinIcons from "base64-cryptocurrency-icons";
+import { createGlobalStyle } from "styled-components";
+
+import Router from "./Router";
 
 const GlobalStyle = createGlobalStyle`
  html, body, div, span, applet, object, iframe,
@@ -67,82 +67,10 @@ const GlobalStyle = createGlobalStyle`
   
 `;
 
-const Container = styled.div`
-    padding: 0 20px;
-    max-width: 480px;
-    margin: 0 auto;
-`;
-const Header = styled.h1`
-    text-align: center;
-`;
-
-const CoinList = styled.ul`
-    li {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 10px;
-        background-color: white;
-        cursor: pointer;
-        span {
-            margin-left: 10px;
-            color: ${(props) => props.theme.bgColor};
-        }
-    }
-`;
-
-const CoinImg = styled.img`
-    width: 40px;
-    height: 40px;
-`;
-
-interface Coins {
-    id: string;
-    name: string;
-    symbol: string;
-    rank: number;
-    is_new: boolean;
-    is_active: boolean;
-    type: "coin";
-}
-
 function App() {
-    const [coins, setCoins] = useState<Coins[]>();
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        (async function getCoins() {
-            const coin = await (
-                await fetch(`https://api.coinpaprika.com/v1/coins`)
-            ).json();
-            setCoins(coin.slice(0, 100));
-            setLoading(false);
-        })();
-    }, []);
     return (
         <>
-            <Container>
-                <Header>비트코인</Header>
-                {loading ? (
-                    <span>loading...</span>
-                ) : (
-                    <CoinList>
-                        {coins?.map((coin) => (
-                            <li key={coin.id}>
-                                <CoinImg
-                                    src={
-                                        coinIcons[coin.symbol.toUpperCase()]
-                                            ?.icon
-                                    }
-                                />{" "}
-                                <span>{coin.name} &rarr;</span>
-                            </li>
-                        ))}
-                    </CoinList>
-                )}
-            </Container>
-
+            <Router />
             <GlobalStyle />
         </>
     );
