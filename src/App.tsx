@@ -1,10 +1,11 @@
 import { createGlobalStyle } from "styled-components";
-
+// import { Reset } from "styled-reset";
 import Router from "./Router";
 
 const GlobalStyle = createGlobalStyle`
- html, body, div, span, applet, object, iframe,
-    h2, h3, h4, h5, h6, p, blockquote, pre,
+    
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
     del, dfn, em, img, ins, kbd, q, s, samp,
     small, strike, strong, sub, sup, tt, var,
@@ -32,6 +33,9 @@ const GlobalStyle = createGlobalStyle`
     *[hidden] {
         display: none;
     }
+    body {
+    line-height: 1;
+    }
     menu, ol, ul {
     list-style: none;
     }
@@ -50,27 +54,23 @@ const GlobalStyle = createGlobalStyle`
     * {
     box-sizing: border-box;
     }
-
-    body{
-        font-weight: 300;
-        font-family: 'Source Sans Pro', sans-serif;
-        line-height: 1;
-        color: ${(props) => props.theme.textColor};
-        background-color: ${(props) => props.theme.bgColor};
-        
-    }       
-
-    a{
-        text-decoration: none;
-        color:inherit;
+    body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color:${(props) => props.theme.bgColor};
+    color:${(props) => props.theme.textColor}
     }
-  
-`;
+    a {
+    text-decoration:none;
+    color:inherit;
+    }
+
+ `;
 
 function App() {
     return (
         <>
             <Router />
+            {/* <Reset /> */}
             <GlobalStyle />
         </>
     );

@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.25",
-    "base64-cryptocurrency-icons": "^1.1.20"
+    "base64-cryptocurrency-icons": "^1.1.20",
+    "styled-reset": "^4.4.1"
   }
 }

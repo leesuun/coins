@@ -1,87 +1,102 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import coinIcons from "base64-cryptocurrency-icons";
+import styled from "styled-components";
 
-const CoinList = styled.ul`
+const Container = styled.div`
+    padding: 0px 20px;
+`;
+
+const Header = styled.header`
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const CoinsList = styled.ul``;
+
+const Coin = styled.li`
+    background-color: white;
+    color: ${(props) => props.theme.bgColor};
+    border-radius: 15px;
+    margin-bottom: 10px;
     a {
         display: flex;
         align-items: center;
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 10px;
-        color: ${(props) => props.theme.bgColor};
-        background-color: white;
-
-        &:hover {
-            cursor: pointer;
-            color: red;
-        }
-        span {
-            margin-left: 10px;
+        padding: 20px;
+        transition: color 0.2s ease-in;
+    }
+    &:hover {
+        a {
+            color: ${(props) => props.theme.accentColor};
         }
     }
 `;
 
-const Container = styled.div`
-    padding: 0 20px;
-    max-width: 480px;
-    margin: 0 auto;
+const Title = styled.h1`
+    font-size: 48px;
+    color: ${(props) => props.theme.accentColor};
 `;
-const Header = styled.h1`
+
+const Loading = styled.span`
     text-align: center;
+    display: block;
 `;
 
 const CoinImg = styled.img`
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
 `;
 
-interface ICoin {
+interface ICoins {
     id: string;
     name: string;
     symbol: string;
     rank: number;
     is_new: boolean;
     is_active: boolean;
-    type: "coin";
+    type: string;
 }
 
 function Coins() {
-    const [coins, setCoins] = useState<ICoin[]>();
+    const [coins, setCoins] = useState<ICoins[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        (async function getCoins() {
-            const coin = await (
+        (async function fetchCoins() {
+            const coins = await (
                 await fetch(`https://api.coinpaprika.com/v1/coins`)
             ).json();
-            setCoins(coin.slice(0, 100));
+            setCoins(coins.slice(0, 100));
             setLoading(false);
         })();
     }, []);
+
     return (
         <Container>
-            <Header>비트코인</Header>
-            {loading ? (
-                <span>...loading</span>
-            ) : (
-                <CoinList>
-                    {coins?.map((coin) => (
-                        <li key={coin.id}>
-                            <Link to={`/${coin.id}`} state={coin.id}>
+            <Header>
+                <Title>비트코인</Title>
+            </Header>
+            <CoinsList>
+                {loading ? (
+                    <Loading>loading...</Loading>
+                ) : (
+                    coins.map((coin) => (
+                        <Coin key={coin.id}>
+                            <Link
+                                to={`/${coin.id}`}
+                                state={{ name: coin.name }}
+                            >
                                 <CoinImg
-                                    src={
-                                        coinIcons[coin.symbol.toUpperCase()]
-                                            ?.icon
-                                    }
+                                    src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
                                 />
-                                <span>{coin.name} &rarr;</span>
+                                {coin.name} &rarr;
                             </Link>
-                        </li>
-                    ))}
-                </CoinList>
-            )}
+                        </Coin>
+                    ))
+                )}
+            </CoinsList>
         </Container>
     );
 }

@@ -1,16 +1,10 @@
-import { DefaultTheme, LightTheme, DarkTheme } from "styled-components";
+// my-theme.ts
+import { DefaultTheme } from "styled-components";
 
-export const Theme: DefaultTheme = {
+const theme: DefaultTheme = {
     bgColor: "#2f3640",
     textColor: "#f5f6fa",
+    accentColor: "#9c88ff",
 };
 
-export const DarkMode: DarkTheme = {
-    bgColor: "#2f3640",
-    textColor: "#f5f6fa",
-};
-
-export const LightMode: LightTheme = {
-    bgColor: "#9c88ff",
-    textColor: "#f5f6fa",
-};
+export { theme };
