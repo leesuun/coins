@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { fetchCoins } from "../api";
 
 const Container = styled.div`
     padding: 0px 20px;
@@ -60,29 +63,22 @@ interface ICoins {
 }
 
 function Coins() {
-    const [coins, setCoins] = useState<ICoins[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        (async function fetchCoins() {
-            const coins = await (
-                await fetch(`https://api.coinpaprika.com/v1/coins`)
-            ).json();
-            setCoins(coins.slice(0, 100));
-            setLoading(false);
-        })();
-    }, []);
+    const { isLoading, data } = useQuery<ICoins[]>("allCoins", fetchCoins);
 
     return (
         <Container>
+            <Helmet>
+                <title>코인</title>
+            </Helmet>
             <Header>
                 <Title>비트코인</Title>
             </Header>
+
             <CoinsList>
-                {loading ? (
+                {isLoading ? (
                     <Loading>loading...</Loading>
                 ) : (
-                    coins.map((coin) => (
+                    data?.slice(0, 100).map((coin) => (
                         <Coin key={coin.id}>
                             <Link
                                 to={`/${coin.id}`}
