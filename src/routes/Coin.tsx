@@ -9,8 +9,8 @@ import {
     useParams,
 } from "react-router";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { Helmet } from "react-helmet";
+import styled, { keyframes } from "styled-components";
+import { Helmet } from "react-helmet-async";
 import { fetchInfoData, fetchPriceData } from "../api";
 
 const Container = styled.div`
@@ -76,6 +76,33 @@ const Tab = styled.span<{ isActive: boolean }>`
         display: block;
     }
 `;
+
+const BtnOpacity = keyframes`
+    from{
+        opacity: 0.5
+    }
+    to{
+        opacity: 1
+    }
+
+`;
+
+const BackBtn = styled.button`
+    position: absolute;
+    left: 3px;
+    top: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: tomato;
+    opacity: 0.5;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 1;
+        animation: ${BtnOpacity} 0.5s ease-in;
+    }
+`;
+
 export interface RouterState {
     state: {
         name: string;
@@ -168,6 +195,9 @@ function Coin() {
                     <title>코인</title>
                 </Helmet>
                 <Header>
+                    <Link to={`/`}>
+                        <BackBtn>⬅ Back</BackBtn>
+                    </Link>
                     <Title>
                         {state?.name
                             ? state.name
