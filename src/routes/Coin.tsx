@@ -22,6 +22,7 @@ const Header = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 `;
 const Title = styled.h1`
     font-size: 48px;
@@ -135,7 +136,7 @@ export interface InfoData {
     last_data_at: string;
 }
 
-interface PriceData {
+export interface PriceData {
     id: string;
     name: string;
     symbol: string;
@@ -185,7 +186,7 @@ function Coin() {
         ["tickers", coinId],
         () => fetchPriceData(coinId)
     );
-
+    // console.log(priceInfo);
     const loading = infoLoading || priceLoading;
 
     return (

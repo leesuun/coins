@@ -19,10 +19,10 @@ function Chart() {
 
     const { isLoading, data } = useQuery(
         ["ohlcv", coinId],
-        () => fetchCoinHistory(coinId),
-        { refetchInterval: 5000 }
+        () => fetchCoinHistory(coinId)
+        // { refetchInterval: 5000 }
     );
-    console.log(data);
+    // console.log(data);
 
     return (
         <>

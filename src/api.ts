@@ -21,3 +21,8 @@ export function fetchCoinHistory(coinId?: string) {
         `https://ohlcv-api.nomadcoders.workers.dev/?coinId=${coinId}`
     ).then((response) => response.json());
 }
+export function fetchexchangeRate() {
+    return fetch(
+        `https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD`
+    ).then((response) => response.json());
+}
