@@ -4,20 +4,34 @@ import Coin from "./routes/Coin";
 import Coins from "./routes/Coins";
 import Price from "./routes/Price";
 
-function Router() {
-    return (
-        <>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Coins />}></Route>
-                    <Route path="/:coinId/*" element={<Coin />}>
-                        <Route path={`price`} element={<Price />} />
-                        <Route path={`chart`} element={<Chart />} />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
-        </>
-    );
+export interface IRouterProps {
+  isDark: boolean;
+  setIsDark: (a: any) => void;
+}
+
+function Router({ isDark, setIsDark }: IRouterProps) {
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<Coins isDark={isDark} setIsDark={setIsDark} />}
+          ></Route>
+          <Route
+            path="/:coinId/*"
+            element={<Coin isDark={isDark} setIsDark={setIsDark} />}
+          >
+            <Route path={`price`} element={<Price />} />
+            <Route
+              path={`chart`}
+              element={<Chart setIsDark={setIsDark} isDark={isDark} />}
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default Router;

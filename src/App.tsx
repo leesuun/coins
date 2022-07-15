@@ -1,7 +1,9 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import Router from "./Router";
+import { DarkMode, LightMode } from "./theme";
+import { useState } from "react";
 
 const GlobalStyle = createGlobalStyle`
     
@@ -68,13 +70,17 @@ const GlobalStyle = createGlobalStyle`
  `;
 
 function App() {
-    return (
-        <>
-            <Router />
-            <GlobalStyle />
-            <ReactQueryDevtools initialIsOpen={true} />
-        </>
-    );
+  const [isDark, setIsDark] = useState(false);
+  const toggleDark = () => setIsDark((prev) => !prev);
+  return (
+    <>
+      <ThemeProvider theme={isDark ? DarkMode : LightMode}>
+        <Router isDark={isDark} setIsDark={toggleDark} />
+        <GlobalStyle />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
+    </>
+  );
 }
 
 export default App;
