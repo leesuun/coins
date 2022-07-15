@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Chart from "./routes/Chart";
 import Coin from "./routes/Coin";
 import Coins from "./routes/Coins";
@@ -12,7 +12,7 @@ export interface IRouterProps {
 function Router({ isDark, setIsDark }: IRouterProps) {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route
             path="/"
@@ -29,7 +29,7 @@ function Router({ isDark, setIsDark }: IRouterProps) {
             />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }

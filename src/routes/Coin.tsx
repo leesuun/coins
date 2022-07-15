@@ -1,13 +1,5 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import {
-  Outlet,
-  Route,
-  Routes,
-  useLocation,
-  useMatch,
-  useParams,
-} from "react-router";
+import { Outlet, useLocation, useMatch, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { Helmet } from "react-helmet-async";

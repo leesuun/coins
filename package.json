@@ -2,7 +2,6 @@
   "name": "coins",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://leesuun.github.io/coins",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -56,5 +55,6 @@
     "react-apexcharts": "^1.4.0",
     "react-helmet": "^6.1.0",
     "styled-reset": "^4.4.1"
-  }
+  },
+  "homepage": "https://leesuun.github.io/coins/"
 }
