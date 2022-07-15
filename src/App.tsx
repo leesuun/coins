@@ -1,5 +1,4 @@
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 import Router from "./Router";
 import { DarkMode, LightMode } from "./theme";
@@ -77,7 +76,6 @@ function App() {
       <ThemeProvider theme={isDark ? DarkMode : LightMode}>
         <Router isDark={isDark} setIsDark={toggleDark} />
         <GlobalStyle />
-        <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>
     </>
   );
